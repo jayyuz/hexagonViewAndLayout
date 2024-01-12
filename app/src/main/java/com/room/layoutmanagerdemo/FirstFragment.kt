@@ -35,7 +35,8 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerView.adapter = HexagonLayoutManagerAdapter()
+        val adapter = HexagonLayoutManagerAdapter()
+        binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = HexagonLayoutManager(9)
         binding.recyclerView.post {
             Log.e("jaesonzhang", "onViewCreated: ${binding.recyclerView.height},${binding.recyclerView.width}")
@@ -43,6 +44,26 @@ class FirstFragment : Fragment() {
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+        var i = 0
+        val list: MutableList<String> = mutableListOf()
+        while (i < 100) {
+            i++
+            list.add("$i")
+        }
+        adapter.add(list)
+        adapter.notifyDataSetChanged()
+
+        binding.buttonAdd.setOnClickListener {
+            i++
+            adapter.add("$i")
+        }
+        binding.buttonMove.setOnClickListener {
+            adapter.move(0, 9)
+        }
+        binding.buttonRemove.setOnClickListener {
+            adapter.remove(30)
+        }
+
     }
 
     override fun onDestroyView() {
