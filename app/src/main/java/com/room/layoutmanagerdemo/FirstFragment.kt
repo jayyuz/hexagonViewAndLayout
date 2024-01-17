@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.room.layoutmanagerdemo.databinding.FragmentFirstBinding
+import com.room.layoutmanagerdemo.ui.CustomItemAnimator
 import com.room.roomwordsample.adapters.HexagonLayoutManagerAdapter
 import com.room.roomwordsample.layout.manager.HexagonLayoutManager
 
@@ -41,6 +42,7 @@ class FirstFragment : Fragment() {
         binding.recyclerView.post {
             Log.e("jaesonzhang", "onViewCreated: ${binding.recyclerView.height},${binding.recyclerView.width}")
         }
+        binding.recyclerView.itemAnimator = CustomItemAnimator()
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
@@ -58,7 +60,7 @@ class FirstFragment : Fragment() {
             adapter.add("$i")
         }
         binding.buttonMove.setOnClickListener {
-            adapter.move(0, 9)
+            adapter.move(0, 6)
         }
         binding.buttonRemove.setOnClickListener {
             adapter.remove(30)

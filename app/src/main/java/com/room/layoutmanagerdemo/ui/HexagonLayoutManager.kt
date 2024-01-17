@@ -52,8 +52,10 @@ class HexagonLayoutManager(private val mGroupSize: Int = 5, private val mAlignCe
         val lineHeight = itemHeight * H3
         for (i in 0 until itemCount) {
             val item: Rect = mItemFrame[i]
+            // offsetHeight 当前View所在的组的顶部
             var offsetHeight = (i / mGroupSize * lineHeight).toInt()
-
+            // 手动计算当前View应该所在的位置（相对recyclerView位置零偏移）
+            // offset 当前View所在的组的偏移
             val offset = i % mGroupSize
             if (isItemInFirstLine(i)) {
                 baseLeftOffset = mGravityOffset + offset * (itemWidth + itemWidth / 2)

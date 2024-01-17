@@ -66,6 +66,11 @@ class HexagonView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : V
         return super.dispatchTouchEvent(event)
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        clearAnimation()
+    }
+
     private fun isEventInPath(event: MotionEvent): Boolean {
         val bounds = RectF()
         mDrawPath.computeBounds(bounds, true)
