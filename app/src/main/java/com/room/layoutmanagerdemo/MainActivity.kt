@@ -1,26 +1,34 @@
 package com.room.layoutmanagerdemo
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
 import com.room.layoutmanagerdemo.databinding.ActivityMainBinding
+import com.room.layoutmanagerdemo.theme.SkinFactory
+
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var skinFactory: SkinFactory
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
-
+        skinFactory = SkinFactory(delegate)
+        val layoutInflater = layoutInflater
+        layoutInflater
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,6 +43,14 @@ class MainActivity : AppCompatActivity() {
                     .setAnchorView(R.id.fab)
                     .setAction("Action", null).show()
         }
+
+    }
+
+    @SuppressLint("SoonBlockedPrivateApi")
+    private fun resetmFactorySet(instance: LayoutInflater) {
+        val mFactorySetField = LayoutInflater::class.java.getDeclaredField("mFactorySet")
+        mFactorySetField.isAccessible = true
+        mFactorySetField.set(instance, false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -57,5 +73,9 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    fun getToolBar(): MaterialToolbar {
+        return binding.toolbar
     }
 }

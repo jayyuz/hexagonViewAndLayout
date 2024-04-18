@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  全屏幕布布局自定义属性  -->
+    <declare-styleable name="CurtainLayout">
+        <!--Item的横向间距-->
+        <attr name="horizontalSpacing" format="dimension" />
+        <!--Item的垂直间距-->
+        <attr name="verticalSpacing" format="dimension" />
+        <!--每行需要展示多少数量的Item-->
+        <attr name="rowCount" format="integer" />
+        <!--垂直方向瀑布流布局，固定宽度为多少-->
+        <attr name="fixedWidth" format="dimension" />
+        <!--水平方向瀑布流布局，固定高度为多少-->
+        <attr name="fixedHeight" format="dimension" />
+        <!--是否只能在布局内部移动 当为false时候为自由移动-->
+        <attr name="moveInViewport" format="boolean" />
+        <!--是否可以缩放-->
+        <attr name="enableScale" format="boolean" />
+        <!--最大与最小的缩放比例-->
+        <attr name="maxScale" format="float" />
+        <attr name="minScale" format="float" />
+    </declare-styleable>
+</resources>

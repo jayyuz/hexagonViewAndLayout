@@ -40,7 +40,6 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
             EventBus.getDefault().post(Message(0, "xxx"))
             EventBus.getDefault().post(EventMessage("xx"))
         }

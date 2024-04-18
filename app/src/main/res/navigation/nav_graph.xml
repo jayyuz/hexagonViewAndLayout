@@ -3,14 +3,46 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_graph"
-        app:startDestination="@id/FirstFragment">
+        app:startDestination="@id/DemoMenusFragment">
 
+    <fragment
+            android:id="@+id/DemoMenusFragment"
+            android:name="com.room.layoutmanagerdemo.menus.DemoMenusFragment"
+            android:label="Demos"
+            tools:layout="@layout/fragment_demo_menus_list">
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_SecondFragment"
+                app:destination="@id/SecondFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_FirstFragment"
+                app:destination="@id/FirstFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_ThirdFragment"
+                app:destination="@id/ThirdFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_EdgeEffectFragment"
+                app:destination="@id/EdgeEffectFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_LinearLayoutFragment"
+                app:destination="@id/LinearLayoutFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_ChangeThemeFragment"
+                app:destination="@id/ChangeThemeFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_CurtainFragment"
+                app:destination="@id/CurtainFragment" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/EdgeEffectFragment"
+            android:name="com.room.layoutmanagerdemo.EdgeEffectFragment"
+            android:label="EdgeEffect"
+            tools:layout="@layout/fragment_edge_effect" />
     <fragment
             android:id="@+id/FirstFragment"
             android:name="com.room.layoutmanagerdemo.FirstFragment"
             android:label="@string/first_fragment_label"
             tools:layout="@layout/fragment_first">
-
         <action
                 android:id="@+id/action_FirstFragment_to_SecondFragment"
                 app:destination="@id/SecondFragment" />
@@ -19,10 +51,28 @@
             android:id="@+id/SecondFragment"
             android:name="com.room.layoutmanagerdemo.SecondFragment"
             android:label="@string/second_fragment_label"
-            tools:layout="@layout/fragment_second">
+            tools:layout="@layout/fragment_second" />
+    <fragment
+            android:id="@+id/ThirdFragment"
+            android:name="com.room.layoutmanagerdemo.ThirdFragment"
+            android:label="@string/second_fragment_label"
+            tools:layout="@layout/fragment_third" />
 
-        <action
-                android:id="@+id/action_SecondFragment_to_FirstFragment"
-                app:destination="@id/FirstFragment" />
-    </fragment>
+    <fragment
+            android:id="@+id/LinearLayoutFragment"
+            android:name="com.room.layoutmanagerdemo.LinearLayoutFragment"
+            android:label="LinearLayout"
+            tools:layout="@layout/fragment_linear_layout" />
+
+    <fragment
+            android:id="@+id/ChangeThemeFragment"
+            android:name="com.room.layoutmanagerdemo.ChangeThemeFragment"
+            android:label="ChangeThemeFragment"
+            tools:layout="@layout/fragment_change_theme" />
+
+    <fragment android:id="@+id/CurtainFragment"
+        android:name="com.room.layoutmanagerdemo.CurtainFragment"
+        android:label="Curtain"
+        tools:layout="@layout/fragment_curtain"/>
+
 </navigation>

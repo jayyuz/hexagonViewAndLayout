@@ -4,4 +4,8 @@
         <attr name="size" format="dimension|reference" />
         <attr name="bgColor" format="color|reference" />
     </declare-styleable>
+
+    <declare-styleable name="Skinable">
+        <attr name="supportSkin" format="boolean" />
+    </declare-styleable>
 </resources>

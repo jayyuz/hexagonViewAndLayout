@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#edeff7">
+
+    <View
+            android:id="@+id/ball_shadow"
+            android:layout_width="188dp"
+            android:layout_height="188dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/ball_shadow_bg"
+            app:layout_constraintBottom_toBottomOf="@+id/ball"
+            app:layout_constraintEnd_toEndOf="@+id/ball"
+            app:layout_constraintStart_toStartOf="@+id/ball"
+            app:layout_constraintTop_toTopOf="@+id/ball" />
+
+    <View
+            android:id="@+id/ball"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
+            android:background="@drawable/ball_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+            android:id="@+id/img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/rocket"
+            app:layout_constraintBottom_toBottomOf="@id/ball"
+            app:layout_constraintEnd_toEndOf="@id/ball"
+            app:layout_constraintStart_toStartOf="@id/ball"
+            app:layout_constraintTop_toTopOf="@id/ball" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

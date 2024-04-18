@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.room.layoutmanagerdemo.ui.curtain_layout.CurtainLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/curtain_view"
+        app:enableScale="true"
+        app:fixedWidth="150dp"
+        app:horizontalSpacing="10dp"
+        app:maxScale="5.5"
+        app:minScale="0.1"
+        app:moveInViewport="false"
+        app:rowCount="10"
+        app:verticalSpacing="10dp"
+        tools:context=".CurtainFragment">
+
+
+</com.room.layoutmanagerdemo.ui.curtain_layout.CurtainLayout>
