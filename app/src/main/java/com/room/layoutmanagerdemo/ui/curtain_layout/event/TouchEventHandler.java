@@ -28,6 +28,7 @@ public class TouchEventHandler {
     private static final int TOUCH_MODE_DOUBLE = 2;
     private final OnAnimationEndListener flingXEndAnimateListener;
     private SpringAnimation xSpringAnim;
+    private SpringForce stickToEdgeSpringForce;
 
     private View mView;
     private int mode = 0;
@@ -54,13 +55,19 @@ public class TouchEventHandler {
     private TouchEventListener controlListener = null;
     private int scalePercentOnlyForControlListener = 0;
 
+
     public TouchEventHandler(Context context, View view) {
         this.mView = view;
         // 当FlingAnimation到达边界时，创建一个SpringAnimation来实现回弹效果
         xSpringAnim = new SpringAnimation(mView, DynamicAnimation.X);
+
+        stickToEdgeSpringForce = new SpringForce();
+        stickToEdgeSpringForce.setStiffness(SpringForce.STIFFNESS_VERY_LOW); // 设置弹簧的硬度
+        stickToEdgeSpringForce.setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY); // 设置阻尼比，高阻尼比会有更多的回弹
+
         flingAnimateListener = (animation, value, velocity) -> keepWithinBoundaries();
         flingXEndAnimateListener = (animation, canceled, value, velocity) -> {
-            startBackToEdgeAnimation();
+            startStickToEdgeAnimation();
         };
 
         mGestureDetector = new GestureDetector(context,
@@ -142,7 +149,7 @@ public class TouchEventHandler {
             case MotionEvent.ACTION_UP:
                 mode = TOUCH_MODE_RELEASE;
                 if (flingX == null || (flingX != null && !flingX.isRunning())) {
-                    startBackToEdgeAnimation();
+                    startStickToEdgeAnimation();
                 }
                 break;
             case MotionEvent.ACTION_POINTER_UP:
@@ -221,25 +228,19 @@ public class TouchEventHandler {
         return true;
     }
 
-    private void startBackToEdgeAnimation() {
+    private void startStickToEdgeAnimation() {
         View v = mView;
         xSpringAnim.cancel();
         // 当FlingAnimation到达边界时，创建一个SpringAnimation来实现回弹效果
         if (v.getTranslationX() < v.getRootView().getWidth() - v.getWidth() * v.getScaleX()) {
-            SpringForce springForce = new SpringForce();
-            springForce.setFinalPosition(
+            stickToEdgeSpringForce.setFinalPosition(
                     v.getRootView().getWidth() - v.getWidth() * v.getScaleX()); // 设置回弹的最终位置为当前位置
-            springForce.setStiffness(SpringForce.STIFFNESS_VERY_LOW); // 设置弹簧的硬度
-            springForce.setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY); // 设置阻尼比，高阻尼比会有更多的回弹
-            xSpringAnim.setSpring(springForce);
+            xSpringAnim.setSpring(stickToEdgeSpringForce);
             // 开始回弹动画
             xSpringAnim.start();
         } else if (v.getTranslationX() > 0) {
-            SpringForce springForce = new SpringForce();
-            springForce.setFinalPosition(0); // 设置回弹的最终位置为当前位置
-            springForce.setStiffness(SpringForce.STIFFNESS_VERY_LOW); // 设置弹簧的硬度
-            springForce.setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY); // 设置阻尼比，高阻尼比会有更多的回弹
-            xSpringAnim.setSpring(springForce);
+            stickToEdgeSpringForce.setFinalPosition(0); // 设置回弹的最终位置为当前位置
+            xSpringAnim.setSpring(stickToEdgeSpringForce);
             // 开始回弹动画
             xSpringAnim.start();
         }

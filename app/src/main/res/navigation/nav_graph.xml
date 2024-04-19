@@ -31,6 +31,15 @@
         <action
                 android:id="@+id/action_DemoMenusFragment_to_CurtainFragment"
                 app:destination="@id/CurtainFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_scaleFragment"
+                app:destination="@id/scaleFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_rotateFragment"
+                app:destination="@id/rotateFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_tdFragment"
+                app:destination="@id/tdFragment" />
     </fragment>
 
     <fragment
@@ -70,9 +79,27 @@
             android:label="ChangeThemeFragment"
             tools:layout="@layout/fragment_change_theme" />
 
-    <fragment android:id="@+id/CurtainFragment"
-        android:name="com.room.layoutmanagerdemo.CurtainFragment"
-        android:label="Curtain"
-        tools:layout="@layout/fragment_curtain"/>
+    <fragment
+            android:id="@+id/CurtainFragment"
+            android:name="com.room.layoutmanagerdemo.CurtainFragment"
+            android:label="Curtain"
+            tools:layout="@layout/fragment_curtain" />
+
+    <fragment
+            android:id="@+id/scaleFragment"
+            android:name="com.room.layoutmanagerdemo.ScaleFragment"
+            android:label="Scale"
+            tools:layout="@layout/fragment_scale" />
+
+    <fragment
+            android:id="@+id/rotateFragment"
+            android:name="com.room.layoutmanagerdemo.ThreeDRotateViewGroupFragment"
+            android:label="TRotate"
+            tools:layout="@layout/fragment_three_d_rotate_view_group" />
+    <fragment
+            android:id="@+id/tdFragment"
+            android:name="com.room.layoutmanagerdemo.TDViewFragment"
+            android:label="3D"
+            tools:layout="@layout/fragment_t_d_view" />
 
 </navigation>
