@@ -23,6 +23,8 @@ object MenuContent {
         addItem(MenuItem("ScaleFragment", R.id.action_DemoMenusFragment_to_scaleFragment))
         addItem(MenuItem("3DRotateFragment", R.id.action_DemoMenusFragment_to_rotateFragment))
         addItem(MenuItem("3DViewFragment", R.id.action_DemoMenusFragment_to_tdFragment))
+        addItem(MenuItem("TonghuashunFrag", R.id.action_DemoMenusFragment_to_tonghuaFragment))
+        addItem(MenuItem("ThsFrag", R.id.action_DemoMenusFragment_to_thsFragment))
     }
 
     private fun addItem(item: MenuItem) {

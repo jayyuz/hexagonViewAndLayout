@@ -40,6 +40,12 @@
         <action
                 android:id="@+id/action_DemoMenusFragment_to_tdFragment"
                 app:destination="@id/tdFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_tonghuaFragment"
+                app:destination="@id/tonghuaFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_thsFragment"
+                app:destination="@id/thsFragment" />
     </fragment>
 
     <fragment
@@ -101,5 +107,18 @@
             android:name="com.room.layoutmanagerdemo.TDViewFragment"
             android:label="3D"
             tools:layout="@layout/fragment_t_d_view" />
+
+    <fragment
+            android:id="@+id/tonghuaFragment"
+            android:name="com.room.layoutmanagerdemo.TonghuashunFragment"
+            android:label="同花顺"
+            tools:layout="@layout/fragment_thonghuashun" />
+    <fragment
+            android:id="@+id/thsFragment"
+            android:name="com.room.layoutmanagerdemo.THSFragment"
+            android:label="同花顺"
+            tools:layout="@layout/fragment_t_h">
+
+    </fragment>
 
 </navigation>

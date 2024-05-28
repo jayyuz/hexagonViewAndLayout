@@ -9,8 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.alpha
-import androidx.core.widget.NestedScrollView
+import androidx.core.widget.THSNestedScrollView
 import com.google.android.material.appbar.MaterialToolbar
 import com.room.layoutmanagerdemo.databinding.FragmentThirdBinding
 
@@ -42,7 +41,7 @@ class ThirdFragment : Fragment() {
 //            int oldScrollX, int oldScrollY)->{
 //
 //        }
-        binding.nestedScrollView.setOnScrollChangeListener { v: NestedScrollView,
+        binding.nestedScrollView.setOnScrollChangeListener { v: THSNestedScrollView,
                                                              scrollX: Int,
                                                              scrollY: Int,
                                                              oldScrollX: Int,

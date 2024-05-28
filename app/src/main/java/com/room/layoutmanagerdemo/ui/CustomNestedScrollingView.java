@@ -134,7 +134,9 @@ public class CustomNestedScrollingView extends ViewGroup implements NestedScroll
                 break;
             case MotionEvent.ACTION_MOVE:
                 int deltaY = mLastTouchY - y;
+                // 传给parent，看看parent需要消耗多少
                 if (dispatchNestedPreScroll(0, deltaY, mScrollConsumed, mScrollOffset)) {
+                    // 根据parent消耗的多少，判断自己可以消耗多少
                     deltaY -= mScrollConsumed[1];
                 }
                 if (deltaY != 0) {

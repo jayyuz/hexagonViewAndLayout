@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.room.layoutmanagerdemo.ui.TonghuashunScrollViewTHS xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TonghuashunFragment">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:background="#f0ff0f"
+                tools:visibility="gone" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="#f00fff"
+                tools:visibility="gone" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="#4CAF50"
+                tools:visibility="gone" />
+
+        <com.room.layoutmanagerdemo.ui.TonghuashunLinearLayout
+                android:id="@+id/LinearLayoutMore"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#0fff0f">
+
+            <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="文件内容"
+                    android:padding="30dp"
+                    android:gravity="center_horizontal" />
+
+            <TextView
+                    android:id="@+id/tv_content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Info"
+                    android:padding="10dp"
+                    android:gravity="center_horizontal" />
+
+            <androidx.core.widget.THSNestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:paddingTop="200dp"
+                            android:background="#f00ff0"
+                            android:text="XXXXX"
+                            android:padding="10dp"
+                            android:gravity="center_horizontal" />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="900dp"
+                            android:background="#f0fff0"
+                            android:text="VVVVV"
+                            android:padding="10dp"
+                            android:gravity="center_horizontal" />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#f00ff0"
+                            android:text="end of current view"
+                            android:padding="10dp"
+                            android:gravity="center_horizontal" />
+                </LinearLayout>
+            </androidx.core.widget.THSNestedScrollView>
+
+        </com.room.layoutmanagerdemo.ui.TonghuashunLinearLayout>
+    </LinearLayout>
+
+</com.room.layoutmanagerdemo.ui.TonghuashunScrollViewTHS>
