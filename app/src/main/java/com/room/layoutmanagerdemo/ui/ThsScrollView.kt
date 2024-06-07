@@ -8,7 +8,6 @@ import android.view.VelocityTracker
 import android.view.View
 import android.view.ViewGroup
 import android.widget.OverScroller
-import android.widget.Scroller
 import androidx.core.view.NestedScrollingParent
 import androidx.core.view.forEach
 import androidx.core.view.forEachIndexed
@@ -18,6 +17,7 @@ class ThsScrollView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ViewGroup(context, attrs, defStyleAttr), NestedScrollingParent {
 
+    private var targetViewOnDrag: Boolean = false
     private var interceptTargetViewTouch: Boolean = false
     private var childHeight: Int = 0
     private val TAG = "ThsScrollView"
@@ -108,6 +108,7 @@ class ThsScrollView @JvmOverloads constructor(
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         if (ev.action == MotionEvent.ACTION_DOWN) {
+            mScroller.forceFinished(true)
             if (targetView.y.toInt() != targetViewNormalY) {
                 if (ev.y > height - tabView.height) {
                     // targetView位于底部, 拦截掉触摸事件
@@ -124,6 +125,7 @@ class ThsScrollView @JvmOverloads constructor(
         Log.i(TAG, "onTouchEvent: event.action:${event.action}, event.y:${event.y}")
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
+                targetViewOnDrag = false
                 mLastY = event.y
                 mVelocityTracker.clear()
                 mVelocityTracker.addMovement(event)
@@ -138,12 +140,14 @@ class ThsScrollView @JvmOverloads constructor(
                     if (offset < scrollY) {
                         offset = scrollY
                     }
+                    targetViewOnDrag = true
                     targetView.layout(
                         0, offset, width,
                         offset + targetView.height
                     )
                     Log.i(TAG, "layoutBy: touch event, offset=$offset")
                 } else {
+                    targetViewOnDrag = false
                     scrollBy(0, -deltaY.toInt())
                     mVelocityTracker.addMovement(event)
                     Log.i(TAG, "scrollBy: touch event")
@@ -166,27 +170,45 @@ class ThsScrollView @JvmOverloads constructor(
                     invalidate();
                 }
                 interceptTargetViewTouch = false;
+
+                if (targetViewOnDrag) {
+                    Log.i(TAG, "targetViewOnDrag, scrollY=$scrollY, targetView.y=${targetView.y.toInt()}")
+                    if (scrollY <= targetView.y.toInt()) {
+//                        shouldFixedInTop = true
+                        shouldFixedInTop = false
+//                        shouldFixedInBottom = false
+                    }
+                }
+                targetViewOnDrag = false
             }
         }
 
-        if (scrollY > targetViewBottomY) {
-            shouldFixedInBottom = false
-        } else {
-            shouldFixedInBottom = true
-        }
-
-        if (shouldFixedInBottom && !interceptTargetViewTouch) {
+        if (shouldFixedInTop) {
             targetView.layout(
                 0,
-                height - tabView.measuredHeight + scrollY,
+                scrollY,
                 width,
-                height - tabView.measuredHeight + targetView.measuredHeight + scrollY
+                targetView.measuredHeight + scrollY
             )
         } else {
-            if (!interceptTargetViewTouch) {
+            if (scrollY > targetViewBottomY) {
+                shouldFixedInBottom = false
+            } else {
+                shouldFixedInBottom = true
+            }
+            if (shouldFixedInBottom && !interceptTargetViewTouch) {
                 targetView.layout(
-                    0, targetViewNormalY, width, targetViewNormalY + targetView.height
+                    0,
+                    height - tabView.measuredHeight + scrollY,
+                    width,
+                    height - tabView.measuredHeight + targetView.measuredHeight + scrollY
                 )
+            } else {
+                if (!interceptTargetViewTouch) {
+                    targetView.layout(
+                        0, targetViewNormalY, width, targetViewNormalY + targetView.height
+                    )
+                }
             }
         }
         return true
@@ -212,7 +234,7 @@ class ThsScrollView @JvmOverloads constructor(
         // targetView 跟随:
         //   targetView.Y  == targetViewNormalY
 
-        if (targetView.y.toInt() == targetViewNormalY && scrollY + height < targetViewNormalY + targetView.height) {
+        if (isTargetViewAllShowed()) {
             // 说明没有将 targetView 完全显示出来
             val maxCanScroll = targetViewNormalY + targetView.height - (scrollY + height)
             val canScroll = maxCanScroll.coerceAtMost(dy)
@@ -221,6 +243,9 @@ class ThsScrollView @JvmOverloads constructor(
             Log.i(TAG, "scrollBy1: dx=$dx, dy=$dy, canScroll=$canScroll, not show all, consume all")
         }
     }
+
+    private fun isTargetViewAllShowed() =
+        targetView.y.toInt() == targetViewNormalY && scrollY + height < targetViewNormalY + targetView.height
 
     override fun onNestedScroll(target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int) {
         super.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed)
@@ -238,5 +263,46 @@ class ThsScrollView @JvmOverloads constructor(
                 TAG, "shouldConsume: dyUnconsumed=$dyUnconsumed"
             )
         }
+    }
+
+    override fun onNestedPreFling(target: View, velocityX: Float, velocityY: Float): Boolean {
+        if (scrollY != childHeight - height) {
+            // 说明targetView位于顶部，完全暴露出来了
+            Log.i(
+                TAG, "xxx1"
+            )
+            val maxY = 0.coerceAtLeast(childHeight - height) // 计算最大滚动距离
+            mScroller.fling(0, scrollY, 0, velocityY.toInt(), 0, 0, 0, maxY);
+            invalidate();
+            return true
+        } else {
+            Log.i(
+                TAG, "xxx2"
+            )
+            return false
+        }
+//        return super.onNestedPreFling(target, velocityX, velocityY)
+    }
+
+    override fun onNestedFling(target: View, velocityX: Float, velocityY: Float, consumed: Boolean): Boolean {
+        Log.i(
+            TAG,
+            "onNestedFling: scrollY=$scrollY, height=$height, velocityX=$velocityX, velocityY=${velocityY}, consumed=$consumed,  childHeight - height=${childHeight - height}"
+        )
+
+        if (scrollY != childHeight - height) {
+            // 说明targetView位于顶部，完全暴露出来了
+            if (velocityY < 0 && scrollY != childHeight - height) {
+                val maxY = 0.coerceAtLeast(childHeight - height) // 计算最大滚动距离
+                mScroller.fling(0, scrollY, 0, velocityY.toInt(), 0, 0, 0, maxY);
+                invalidate();
+                return true
+            }
+        } else {
+            // 没有完全露出来
+            return true
+        }
+
+        return super.onNestedFling(target, velocityX, velocityY, consumed)
     }
 }
