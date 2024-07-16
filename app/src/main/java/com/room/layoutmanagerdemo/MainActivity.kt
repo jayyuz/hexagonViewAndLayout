@@ -2,6 +2,7 @@ package com.room.layoutmanagerdemo
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Debug
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -28,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         skinFactory = SkinFactory(delegate)
         val layoutInflater = layoutInflater
-        layoutInflater
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAnchorView(R.id.fab)
                     .setAction("Action", null).show()
+            Debug.stopMethodTracing()
         }
 
     }

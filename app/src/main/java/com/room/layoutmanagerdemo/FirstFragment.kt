@@ -117,6 +117,17 @@ class FirstFragment : Fragment() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
         })
+        binding.seekBar4.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                binding.navigationView.setAngle(progress)
+            }
+
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+        })
     }
 
     override fun onDestroyView() {

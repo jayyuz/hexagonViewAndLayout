@@ -26,6 +26,7 @@ object MenuContent {
         addItem(MenuItem("TonghuashunFrag", R.id.action_DemoMenusFragment_to_tonghuaFragment))
         addItem(MenuItem("ThsFrag", R.id.action_DemoMenusFragment_to_thsFragment))
         addItem(MenuItem("DragItemRecyclerFrag", R.id.action_DemoMenusFragment_to_dragItemRecyclerFragment))
+        addItem(MenuItem("SwipeBackFrag", R.id.action_DemoMenusFragment_to_swipePanelFragment))
     }
 
     private fun addItem(item: MenuItem) {

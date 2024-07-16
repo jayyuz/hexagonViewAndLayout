@@ -49,6 +49,9 @@
         <action
                 android:id="@+id/action_DemoMenusFragment_to_dragItemRecyclerFragment"
                 app:destination="@id/dragItemRecyclerFragment" />
+        <action
+                android:id="@+id/action_DemoMenusFragment_to_swipePanelFragment"
+                app:destination="@id/swipePanelFragment" />
     </fragment>
 
     <fragment
@@ -126,5 +129,11 @@
             android:name="com.room.layoutmanagerdemo.recycler.DragItemRecyclerFragment"
             android:label="RecyclerView"
             tools:layout="@layout/fragment_drag_item_recycler" />
+
+    <fragment
+            android:id="@+id/swipePanelFragment"
+            android:name="com.room.layoutmanagerdemo.SwipePanelFragment"
+            android:label="RecyclerView"
+            tools:layout="@layout/fragment_swipe_panel" />
 
 </navigation>
