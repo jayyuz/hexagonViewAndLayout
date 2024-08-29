@@ -2,10 +2,10 @@ package com.room.layoutmanagerdemo
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Debug
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewTreeObserver.OnPreDrawListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
@@ -13,7 +13,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.snackbar.Snackbar
 import com.room.layoutmanagerdemo.databinding.ActivityMainBinding
 import com.room.layoutmanagerdemo.theme.SkinFactory
 
@@ -31,6 +30,16 @@ class MainActivity : AppCompatActivity() {
         val layoutInflater = layoutInflater
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.root.post {
+            binding.root.viewTreeObserver.addOnPreDrawListener(object : OnPreDrawListener {
+
+                override fun onPreDraw(): Boolean {
+                    binding.root.viewTreeObserver.removeOnPreDrawListener(this)
+//                    Debug.stopMethodTracing()
+                    return true
+                }
+            })
+        }
 
         setSupportActionBar(binding.toolbar)
 
@@ -38,12 +47,12 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAnchorView(R.id.fab)
-                    .setAction("Action", null).show()
-            Debug.stopMethodTracing()
-        }
+//        binding.fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAnchorView(R.id.fab)
+//                    .setAction("Action", null).show()
+//            Debug.stopMethodTracing()
+//        }
 
     }
 

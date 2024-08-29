@@ -1,13 +1,18 @@
 package com.room.layoutmanagerdemo.menus
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.room.layoutmanagerdemo.AppApplication
 import com.room.layoutmanagerdemo.databinding.FragmentDemoMenusBinding
 import com.room.layoutmanagerdemo.menus.model.MenuContent.MenuItem
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class DemoItemRecyclerViewAdapter(
@@ -16,7 +21,11 @@ class DemoItemRecyclerViewAdapter(
 
     var onItemClickListener: OnItemClickListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(FragmentDemoMenusBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        Log.e("DemoItemRecyclerViewAdapter", "onCreateViewHolder: ")
+//        return ViewHolder(FragmentDemoMenusBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        val holder = ViewHolder(AppApplication.demoMenusCache.take())
+        AppApplication.preCreateViewCache()
+        return holder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

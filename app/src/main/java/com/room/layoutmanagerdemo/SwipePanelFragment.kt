@@ -30,19 +30,19 @@ class SwipePanelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.swipePanel.setOnFullSwipeListener { direction ->
-            Toast.makeText(context, "$direction", Toast.LENGTH_LONG).show()
-            if (direction == SwipePanel.TOP) {
-                binding.swipePanel.close(true)
-            }
-        }
-        binding.swipePanel.setOnProgressChangedListener { direction, progress, isTouch ->
-            if (direction == SwipePanel.TOP) {
-                Log.e("test", "setOnProgressChangedListener: $progress")
-                val drawable = binding.swipePanel.getTopDrawable() as RotateDrawable
-                drawable.setLevel((progress * 20000).toInt())
-            }
-        }
+//        binding.swipePanel.setOnFullSwipeListener { direction ->
+//            Toast.makeText(context, "$direction", Toast.LENGTH_LONG).show()
+//            if (direction == SwipePanel.TOP) {
+//                binding.swipePanel.close(true)
+//            }
+//        }
+//        binding.swipePanel.setOnProgressChangedListener { direction, progress, isTouch ->
+//            if (direction == SwipePanel.TOP) {
+//                Log.e("test", "setOnProgressChangedListener: $progress")
+//                val drawable = binding.swipePanel.getTopDrawable() as RotateDrawable
+//                drawable.setLevel((progress * 20000).toInt())
+//            }
+//        }
     }
 
     companion object {}

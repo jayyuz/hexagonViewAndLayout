@@ -4,9 +4,9 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <!--        <item name="android:windowBackground">@color/white</item>-->
-        <item name="android:windowSplashScreenAnimationDuration">300</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">@color/windowbg</item>
-        <item name="android:windowSplashScreenBackground">@color/windowbg</item>
+<!--        <item name="android:windowSplashScreenAnimationDuration">300</item>-->
+<!--        <item name="android:windowSplashScreenIconBackgroundColor">@color/windowbg</item>-->
+<!--        <item name="android:windowSplashScreenBackground">@color/windowbg</item>-->
 <!--        <item name="android:windowSplashScreenBrandingImage">@drawable/chengxiao</item>-->
 <!--        <item name="android:windowSplashScreenAnimatedIcon">@drawable/chengxiao</item>-->
     </style>
